@@ -1,9 +1,8 @@
 defmodule App.Commands do
   use App.Commander
   alias App.Tweets
+  alias App.DevQuotes
 
-  # You can create commands in the format `/command` by
-  # using the macro `command "command"`.
   command "start" do
     Logger.log :info, "Command /start receieved"
     send_message """
@@ -36,6 +35,7 @@ defmodule App.Commands do
 
   command "qotd" do
     Logger.log :info, "Command /qotd receieved"
+    send_message DevQuotes.get_random
   end
 
   command "qotd_gds" do
@@ -54,6 +54,6 @@ defmodule App.Commands do
   # Fallbacks
 
   message do
-    # ignore non-slash messages
+    # ignore non-commands
   end
 end

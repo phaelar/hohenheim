@@ -20,6 +20,7 @@ defmodule App.Mixfile do
   defp deps do
     [
       {:poison, "~>3.0.0", override: true},
+      {:httpoison, "~>0.10.0"},
       {:nadia, "~> 0.4.1"},
       {:extwitter, github: "parroty/extwitter"}
     ]

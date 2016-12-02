@@ -1,0 +1,5 @@
+TELEGRAM_TOKEN=yourtelegramapitoken
+TWITTER_CONSUMER_KEY=yourtwitterconsumerkey
+TWITTER_CONSUMER_SECRET=yourtwitterconsumersecret
+TWITTER_ACCESS_TOKEN=yourtwitteraccesstoken
+TWITTER_ACCESS_TOKEN_SECRET=yourtwittertokensecret

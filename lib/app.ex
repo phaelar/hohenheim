@@ -10,6 +10,7 @@ defmodule App do
     children = [
       worker(App.Tweets, []),
       worker(App.DevQuotes, []),
+      supervisor(App.Repo, []),
       worker(App.Poller, []),
       worker(App.Matcher, [])
     ]

@@ -10,6 +10,7 @@ defmodule App.Commands do
       `/qotd` : Returns a random developer quote from http://fortrabbit.github.io/quotes/
       `/qotd_gds` : Returns a random user-submitted quote
       `/qotd_gds_add <author name> the actual quote` : Add your own quote to the list! Only works if you PM the bot. (example: `/qotd_add <Shia Labeouf> Don't let your dreams be dreams`)
+      `/50nerds` : Returns a random tweet from `@50NerdsOfGrey`'s Twitter page
     """, parse_mode: "Markdown"
   end
 

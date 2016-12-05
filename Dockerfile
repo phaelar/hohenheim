@@ -8,4 +8,4 @@ COPY . /usr/app
 RUN mix local.hex --force
 RUN mix deps.get
 
-ENTRYPOINT ["mix", "server"]
+ENTRYPOINT ["/usr/app/docker-entrypoint.sh"]

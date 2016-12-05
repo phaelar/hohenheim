@@ -13,7 +13,7 @@ defmodule App.Mixfile do
   end
 
   def application do
-    [applications: [:logger, :extwitter, :nadia],
+    [applications: [:logger, :extwitter, :ecto, :postgrex, :nadia],
      mod: {App, []}]
   end
 
@@ -21,8 +21,10 @@ defmodule App.Mixfile do
     [
       {:poison, "~>3.0.0", override: true},
       {:httpoison, "~>0.10.0"},
-      {:nadia, "~> 0.4.1"},
-      {:extwitter, github: "parroty/extwitter"}
+      {:extwitter, github: "parroty/extwitter"},
+      {:ecto, "~>2.0.0"},
+      {:postgrex, "~>0.12.0"},
+      {:nadia, "~> 0.4.1"}
     ]
   end
 

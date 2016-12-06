@@ -49,7 +49,12 @@ defmodule App.Commands do
 
   command "50nerds" do
     Logger.log :info, "Command /50nerds receieved"
-    send_message Tweets.get_random
+    send_message Tweets.get_random(:fiftynerds)
+  end
+
+  command "phpceo" do
+    Logger.log :info, "Command /phpceo receieved"
+    send_message Tweets.get_random(:phpceo)
   end
 
   # Fallbacks

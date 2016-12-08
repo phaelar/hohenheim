@@ -17,12 +17,12 @@ defmodule App.Quote do
   def insert_quote(%{} = quote) do
     %Quote{}
     |> cast(quote, @required_fields)
-    |> Repo.insert!
+    |> Repo.insert
   end
 
   def delete_quote(quote_id) do
     get_quote(quote_id)
-    |> Repo.delete!
+    |> Repo.delete
   end
 
   def get_quote(quote_id) do
@@ -39,11 +39,11 @@ defmodule App.Quote do
 
   def get_random do
     query = from q in Quote,
-      select: {q.message},
       order_by: fragment("RANDOM()"),
-      limit: 1
+      limit: 1,
+      select: {q.message, q.author}
 
     query
-    |> Repo.all
+    |> Repo.one
   end
 end

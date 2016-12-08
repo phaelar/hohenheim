@@ -42,7 +42,11 @@ defmodule App.Commands do
 
   command "qotd_gds" do
     Logger.log :info, "Command /qotd_gds receieved"
-    IO.puts Quote.get_random
+
+    Quote.get_random
+    # message format: "quote" - author
+    |> (fn q -> "\"#{elem(q,0)}\" - #{elem(q,1)}" end).()
+    |> send_message
   end
 
   command "qotd_gds_add" do

@@ -24,7 +24,10 @@ else
 fi
 set -e
 
+# TODO: check if database exists before proceeding
 mix ecto.create
+
+# TODO: check if table exists before proceeding
 mix ecto.migrate
 
 mix server

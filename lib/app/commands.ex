@@ -2,6 +2,7 @@ defmodule App.Commands do
   use App.Commander
   alias App.Tweets
   alias App.DevQuotes
+  alias App.Quote
 
   command "start" do
     Logger.log :info, "Command /start receieved"
@@ -41,6 +42,7 @@ defmodule App.Commands do
 
   command "qotd_gds" do
     Logger.log :info, "Command /qotd_gds receieved"
+    IO.puts Quote.get_random
   end
 
   command "qotd_gds_add" do

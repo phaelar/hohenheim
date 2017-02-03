@@ -1,31 +1,32 @@
 defmodule App.Tweets do
   def start_link do
-    Agent.start_link(fn -> fetch_from_twitter end, name: __MODULE__)
+    Agent.start_link(fn -> %{
+      :fiftynerds => fetch_user_tweets("50nerdsofgrey"),
+      :phpceo => fetch_user_tweets("php_ceo")
+    } end, name: __MODULE__)
   end
 
-  def get_random do
-    Agent.get(__MODULE__, &(Enum.random(tl(&1))))
+  def get_random(screen_name) do
+    Agent.get(__MODULE__, &(Enum.random(&1)))[screen_name]
   end
 
-  defp fetch_from_twitter() do
-    opts = [screen_name: "50nerdsofgrey", count: 200]
+  def fetch_user_tweets(screen_name) do
+    fetch_tweets([screen_name: screen_name, count: 200])
+  end
+
+  defp fetch_user_tweets(screen_name, max) do
+    fetch_tweets([screen_name: screen_name, count: 200, max_id: max])
+  end
+
+  defp fetch_tweets(opts) do
     current_batch = ExTwitter.user_timeline(opts)
+    last_id = List.last(current_batch).id
+    tweets = Enum.map(current_batch, &(&1.text))
 
-    if length(current_batch) < 200 do
-      (current_batch |> Enum.map(&(&1.text)))
+    if length(current_batch) < opts[:count] do
+      tweets
     else
-      (current_batch |> Enum.map(&(&1.text))) ++ fetch_from_twitter(List.last(current_batch).id)
-    end
-  end
-
-  defp fetch_from_twitter(max) do
-    opts = [screen_name: "50nerdsofgrey", count: 200, max_id: max]
-    current_batch = ExTwitter.user_timeline(opts)
-
-    if length(current_batch) < 200 do
-      (current_batch |> Enum.map(&(&1.text)))
-    else
-      (current_batch |> Enum.map(&(&1.text))) ++ fetch_from_twitter(List.last(current_batch).id)
+      [ tweets | fetch_user_tweets(opts[:screen_name], List.last(current_batch).id) ]
     end
   end
 end
